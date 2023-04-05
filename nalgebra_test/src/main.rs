@@ -3,6 +3,14 @@ extern crate nalgebra as na;
 // Defining a custom column vector, statically sized, with 10 rows
 type Vector10 = na::SVector<i32, 10>;
 
+fn cond(a: na::Matrix2<f64>) -> (f64, f64, f64) {
+    let a_i = a.try_inverse().unwrap();
+    let norm_a: f64 = a.norm();
+    let norm_a_i: f64 = a_i.norm();
+    let cond: f64 = norm_a * norm_a_i;
+    (norm_a, norm_a_i, cond)
+}
+
 fn main() {
     // Simple vectors and showing basic arithmetic.
     let vec1 = na::Vector2::new(1.0, 3.0);
@@ -58,4 +66,22 @@ fn main() {
     // Easy to calculate SVD of a matrix
     let svd = m4.svd(true, true);
     println!("svd = {}", svd.singular_values);
+
+    // Condition number of a matrix is the norm of the matrix times the norm of the inverse
+    let m2x2 = na::Matrix2::new(1.0, 2.0, 3.0, 4.0);
+    let m2x2_i = m2x2.try_inverse().unwrap();
+    // Get the norm of matrix4x4 (in this case its the L2 norm)
+    let norm_m2x2: f64 = m2x2.norm();
+    println!("norm_m2x2 = {}", norm_m2x2);
+    // Get the norm of the inverse of matrix4x4
+    let norm_inverse_m2x2: f64 = m2x2_i.norm();
+    println!("norm_inverse_m4x4 = {}", norm_inverse_m2x2);
+    let cond2x2: f64 = norm_m2x2 * norm_inverse_m2x2;
+    println!("cond = {}", cond2x2);
+
+    let b = na::Matrix2::new(1.0, 0.99, 1.99, 2.0);
+    let (norm_b, norm_b_i, cond_b) = cond(b);
+    println!("norm_b = {}", norm_b);
+    println!("norm_b_i = {}", norm_b_i);
+    println!("cond_b = {}", cond_b);
 }

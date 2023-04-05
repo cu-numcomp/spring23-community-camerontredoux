@@ -7,13 +7,13 @@
 - Perform in-depth analysis of the speed of performing certain operations (QR decomposition, multiplication, SVD) in nalgebra vs. Julia (built-ins or custom, could be interesting to see how a naive QR solution like in class would hold up).
 - See which cases SIMD matters or helps with performance.
 - Fairly easy to present in terms of visuals (graphically with time on x-axis and dimension of matrix on y-axis)
--
 
 ## Questions
 
 - Prof. Brown mentioned that this tool is popular for unbatched processing of small dimension matrices. Why is this?
 - How can I perform a test between batched and unbatched processing of larger and smaller matrices?
 - How would enabling SIMD impact performance of multiplying matrices? (this is pretty easy to answer with the [simba](https://docs.rs/simba/latest/simba/) crate)
+- Does Rust have higher precision than Julia? Is this why cond(A) is different?
 
 ## Other information
 
@@ -190,6 +190,35 @@ svd =
   │ 2.0960691446239803 │
   │ 0.9448463989858188 │
   └                    ┘
+```
+
+## Condition Number
+
+```rust
+// Condition number of a matrix is the norm of the matrix times the norm of the inverse
+let m2x2 = na::Matrix2::new(1.0, 2.0, 3.0, 4.0);
+let m2x2_i = m2x2.try_inverse().unwrap();
+// Get the norm of matrix4x4 (in this case its the L2 norm)
+let norm_m2x2: f64 = m2x2.norm();
+println!("norm_m2x2 = {}", norm_m2x2);
+// Get the norm of the inverse of matrix4x4
+let norm_inverse_m2x2: f64 = m2x2_i.norm();
+println!("norm_inverse_m4x4 = {}", norm_inverse_m2x2);
+let cond2x2: f64 = norm_m2x2 * norm_inverse_m2x2;
+println!("cond = {}", cond2x2);
+
+let b = na::Matrix2::new(1.0, 0.99, 1.99, 2.0);
+let (norm_b, norm_b_i, cond_b) = cond(b); // I just took the above code and made is a more general function
+println!("norm_b = {}", norm_b);
+println!("norm_b_i = {}", norm_b_i);
+println!("cond_b = {}", cond_b);
+// Output
+norm_m2x2 = 5.477225575051661
+norm_inverse_m4x4 = 2.7386127875258306
+cond = 15 // in Julia this is 14.933034373659268
+norm_b = 3.152808272001328
+norm_b_i = 105.4450927090744
+cond_b = 332.4481605351167 // 332.4451525201234 in Julia
 ```
 
 ---
