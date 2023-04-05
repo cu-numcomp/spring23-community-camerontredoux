@@ -2,7 +2,7 @@
 
 ## Software: _nalgebra_
 
-_nalgebra_ was created by [Dimforge](https://github.com/dimforge) and is a linear algebra library written in and for Rust. The library offers support for vectors, matrices, decompositions (Cholesky and QR), transformations, SVD, and a lot more.
+_nalgebra_ was created by [Dimforge](https://github.com/dimforge) and is a linear algebra library written in and for Rust. The library offers support for vectors, matrices, decompositions (Cholesky and QR), transformations, SVD, and a lot more. According to their website, _"It targets applications requiring efficient vector and matrix operations, as well as geometric transformations. It is designed to be fast and comprehensive."_ One of the many draws to Rust as a language is its performance (one of... many people would argue the language features, type system, and compiler are just as great), so it is only sensible to have a growing library of linear algebra tools in the Rust ecosystem. _nalgebra_ targets people in the data science and machine learning realm, as well as the graphics world (through nalgebra-glm).
 
 ### Stats
 
@@ -33,6 +33,8 @@ encountered a problem.
 - [x] I have run at least one example
 - [x] I have run the test suite
 - [x] The test suite passes
+
+![Tests](img/tests.png)
 
 ### Notes/concerns/risks
 
