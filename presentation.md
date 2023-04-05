@@ -1,5 +1,11 @@
 # nalgebra
 
+## Jump to benchmarks at the bottom
+
+Ahead are just some examples of using the library, click [here](#benchmarks) to see benchmarks. Code for benchmarks is located in `nalgebra_test/benches/*.rs`.
+
+To see historical plots of multiple passes through benchmarks, open `nalgebra_test/target/criterion/<benchmark name>/report/index.html`.
+
 ## Need to know
 
 nalgebra uses column vectors so it looks slightly different than the array representation of vectors in Julia. This is console output of the vectors:
@@ -99,5 +105,118 @@ col_3 =
 nalgebra has operator overloading, so you can easily perform arithmetic on matrices:
 
 ```rust
-let m1 =
+let m1 = na::Matrix3::new(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
+let v1 = na::Vector3::new(1.0, 2.0, 3.0);
+let m2 = m1 * v1;
+let m3 = m1 * m2;
+println!("m1 * v1 = {}", m2);
+println!("m1 * m2 = {}", m3);
+// Output
+m1 * v1 =
+  ┌    ┐
+  │ 14 │
+  │ 32 │
+  │ 50 │
+  └    ┘
+m1 * m2 =
+  ┌     ┐
+  │ 228 │
+  │ 516 │
+  │ 804 │
+  └     ┘
 ```
+
+## QR Decomposition
+
+Resulting matrix after multiplying `q * r` has some rounding errors.
+
+```rust
+// Perform QR decomposition on a matrix
+let m4 = na::Matrix3::new(1.0, 2.0, 3.0, 1.0, 3.0, 2.0, 3.0, 1.0, 2.0);
+let qr = m4.qr();
+let q = qr.q();
+let r = qr.r();
+println!("q = {}r = {}", q, r);
+println!("qr = {}", q * r);
+q =
+  ┌                                                                ┐
+  │  0.30151134457776374  0.44494920831460993   0.8432740427115676 │
+  │  0.30151134457776363   0.7945521577046606  -0.5270462766947301 │
+  │   0.9045340337332908 -0.41316712200642347 -0.10540925533894596 │
+  └                                                                ┘
+r =
+  ┌                                                          ┐
+  │    3.3166247903554  2.412090756622109    3.3166247903554 │
+  │                  0  2.860387767736777  2.097617696340304 │
+  │                  0                  0 1.2649110640673513 │
+  └                                                          ┘
+qr =
+  ┌                                                          ┐
+  │ 1.0000000000000004  2.000000000000001  3.000000000000001 │
+  │                  1  3.000000000000001 2.0000000000000018 │
+  │ 2.9999999999999996 0.9999999999999993 1.9999999999999987 │
+  └                                                          ┘
+```
+
+## SVD
+
+```rust
+// Easy to calculate SVD of a matrix
+let svd = m4.svd(true, true);
+println!("svd = {}", svd.singular_values);
+// Output:
+svd =
+  ┌                    ┐
+  │ 6.0591880168285615 │
+  │ 2.0960691446239803 │
+  │ 0.9448463989858188 │
+  └                    ┘
+```
+
+---
+
+# Benchmarks
+
+Benchmarks are completed using `criterion-rs` with no harness selected.
+
+Here are some benchmarks for multiplying two matrices, creating two matrices (to see how if this process is the bottleneck or if multiplying is), and creating + multiplying two matrices in one function.
+
+All these tests collect 100 samples over a certain number of iterations. For lower dimensions, these iterations can easily reach over 1 million (whereas for 1024x1024, only a few hundred iterations are ran)
+
+---
+
+### Multiplying matrix of dimension nxn
+
+| n    | nalgebra  | julia |
+| ---- | --------- | ----- |
+| 16   | 309.58 ns |       |
+| 32   | 1.6607 µs |       |
+| 64   | 10.418 µs |       |
+| 128  | 78.187 µs |       |
+| 256  | 596.41 µs |       |
+| 512  | 4.7759 ms |       |
+| 1024 | 39.149 ms |       |
+
+### Multiplying and creating matrix of dimension nxn
+
+| n    | nalgebra  | julia |
+| ---- | --------- | ----- |
+| 16   | 651.31 ns |       |
+| 32   | 2.3527 µs |       |
+| 64   | 13.028 µs |       |
+| 128  | 86.872 µs |       |
+| 256  | 629.74 µs |       |
+| 512  | 4.8887 ms |       |
+| 1024 | 41.453 ms |       |
+
+### Creating matrix of dimension nxn
+
+| n    | nalgebra  | julia |
+| ---- | --------- | ----- |
+| 16   | 258.73 ns |       |
+| 32   | 713.40 ns |       |
+| 64   | 2.4165 µs |       |
+| 128  | 9.2018 µs |       |
+| 256  | 36.022 µs |       |
+| 512  | 145.50 µs |       |
+| 1024 | 1.4949 ms |       |
