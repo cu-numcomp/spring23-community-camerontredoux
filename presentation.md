@@ -19,7 +19,7 @@
 
 [Jump](#more-info) to the bottom
 
-## Jump to benchmarks at the bottom
+## Jump to benchmarks at the bottom (click [here](nalgebra_test/benches/matrix_multiply.rs) for code)
 
 Ahead are just some examples of using the library, click [here](#benchmarks) to see benchmarks. Code for benchmarks is located in `nalgebra_test/benches/*.rs`.
 
