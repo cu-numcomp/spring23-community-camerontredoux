@@ -39,4 +39,23 @@ fn main() {
     let mut matrix_view_mut = matrix_view.clone();
     matrix_view_mut.row_mut(0).fill(0.0);
     println!("matrix_view_mut = {}", matrix_view_mut);
+
+    let m1 = na::Matrix3::new(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
+    let v1 = na::Vector3::new(1.0, 2.0, 3.0);
+    let m2 = m1 * v1;
+    let m3 = m1 * m2;
+    println!("m1 * v1 = {}", m2);
+    println!("m1 * m2 = {}", m3);
+
+    // Perform QR decomposition on a matrix
+    let m4 = na::Matrix3::new(1.0, 2.0, 3.0, 1.0, 3.0, 2.0, 3.0, 1.0, 2.0);
+    let qr = m4.qr();
+    let q = qr.q();
+    let r = qr.r();
+    println!("q = {}r = {}", q, r);
+    println!("qr = {}", q * r);
+
+    // Easy to calculate SVD of a matrix
+    let svd = m4.svd(true, true);
+    println!("svd = {}", svd.singular_values);
 }
