@@ -14,6 +14,7 @@
 - How can I perform a test between batched and unbatched processing of larger and smaller matrices?
 - How would enabling SIMD impact performance of multiplying matrices? (this is pretty easy to answer with the [simba](https://docs.rs/simba/latest/simba/) crate)
 - Does Rust have higher precision than Julia? Is this why cond(A) is different?
+- Based on preliminary tests... why is Julia so much faster for larger dimension arrays?
 
 ## Other information
 
@@ -249,15 +250,15 @@ Comparison to benchmarks ran for faer-rs (another Rust linear algebra library): 
 
 ### Multiplying and creating matrix of dimension nxn
 
-| n    | nalgebra  | julia |
-| ---- | --------- | ----- |
-| 16   | 651.31 ns |       |
-| 32   | 2.3527 µs |       |
-| 64   | 13.028 µs |       |
-| 128  | 86.872 µs |       |
-| 256  | 629.74 µs |       |
-| 512  | 4.8887 ms |       |
-| 1024 | 41.453 ms |       |
+| n    | nalgebra  | julia      |
+| ---- | --------- | ---------- |
+| 16   | 651.31 ns |            |
+| 32   | 2.3527 µs |            |
+| 64   | 13.028 µs |            |
+| 128  | 86.872 µs |            |
+| 256  | 629.74 µs | 331.067 μs |
+| 512  | 4.8887 ms |            |
+| 1024 | 41.453 ms | 9.811 ms   |
 
 ### Creating matrix of dimension nxn
 
