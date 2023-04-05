@@ -1,12 +1,31 @@
 # nalgebra
 
+## Why nalgebra?
+
+## Group Project Experiment
+
+- Perform in-depth analysis of the speed of performing certain operations (QR decomposition, multiplication, SVD) in nalgebra vs. Julia (built-ins or custom, could be interesting to see how a naive QR solution like in class would hold up).
+- See which cases SIMD matters or helps with performance.
+- Fairly easy to present in terms of visuals (graphically with time on x-axis and dimension of matrix on y-axis)
+-
+
+## Questions
+
+- Prof. Brown mentioned that this tool is popular for unbatched processing of small dimension matrices. Why is this?
+- How can I perform a test between batched and unbatched processing of larger and smaller matrices?
+- How would enabling SIMD impact performance of multiplying matrices? (this is pretty easy to answer with the [simba](https://docs.rs/simba/latest/simba/) crate)
+
+## Other information
+
+[Jump](#more-info) to the bottom
+
 ## Jump to benchmarks at the bottom
 
 Ahead are just some examples of using the library, click [here](#benchmarks) to see benchmarks. Code for benchmarks is located in `nalgebra_test/benches/*.rs`.
 
 To see historical plots of multiple passes through benchmarks, open `nalgebra_test/target/criterion/<benchmark name>/report/index.html`.
 
-## Need to know
+## Examples
 
 nalgebra uses column vectors so it looks slightly different than the array representation of vectors in Julia. This is console output of the vectors:
 
@@ -179,9 +198,11 @@ svd =
 
 Benchmarks are completed using `criterion-rs` with no harness selected.
 
-Here are some benchmarks for multiplying two matrices, creating two matrices (to see how if this process is the bottleneck or if multiplying is), and creating + multiplying two matrices in one function.
+Here are some benchmarks for multiplying two matrices, creating two matrices (to see if this process is the bottleneck or if multiplying is), and creating + multiplying two matrices in one function.
 
-All these tests collect 100 samples over a certain number of iterations. For lower dimensions, these iterations can easily reach over 1 million (whereas for 1024x1024, only a few hundred iterations are ran)
+All these tests collect 100 samples over a certain number of iterations. For lower dimensions, these iterations can easily reach over 1 million (whereas for 1024x1024, only a few hundred iterations are ran).
+
+Comparison to benchmarks ran for faer-rs (another Rust linear algebra library): [here](https://faer-rs.github.io/bench-f64/) (both of these were done using f64 values)
 
 ---
 
@@ -220,3 +241,15 @@ All these tests collect 100 samples over a certain number of iterations. For low
 | 256  | 36.022 µs |       |
 | 512  | 145.50 µs |       |
 | 1024 | 1.4949 ms |       |
+
+# More info
+
+This is a general purpose linear algebra library built around the Rust ecosystem. It offers a lot of support for 3D linear algebra and gaming/graphics.
+
+This project is sponsored by three games studios:
+
+- Fragcolor
+- Embark Studios
+- Resolution
+
+This website does not offer any benchmarking so that is why I want to do it myself.
