@@ -1,5 +1,9 @@
 # nalgebra
 
+Quick note: `nalebra_test` folder is just for examples seen below.
+
+Actual benchmarking now done in the `benchmark` folder which is forked from faer-rs.
+
 ## Why nalgebra?
 
 ## Group Project Experiment
