@@ -22,6 +22,13 @@ Actual benchmarking now done in the `benchmark` folder which is forked from faer
 - Does Rust have higher precision than Julia? Is this why cond(A) is different?
 - Based on preliminary tests... why is Julia so much faster for larger dimension arrays?
 
+## Methods of Interest
+- Matrix multiplication
+- Triangular solve
+- LU decomposition w/ partial pivoting
+- QR decomposition w/ no pivoting
+- Square matrix SVD
+
 ## Other information
 
 [Jump](#more-info) to the bottom
