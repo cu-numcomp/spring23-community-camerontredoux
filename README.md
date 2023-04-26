@@ -78,9 +78,12 @@ figure).
 7. Start a thread on Zulip titled "Your Name: Package Name" with a sentence or two describing the project and a link to your repository.
 
 8. Presentation Goals:
+- What you did and how
 - How you designed your study
 - What you created
 - How you evaluated it
+- Results and interpretation
+- Examples of positive and negative impact
 - It should be placed in context of prior work and show how each team member contributed.
 
 ## Timeline
