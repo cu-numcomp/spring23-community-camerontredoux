@@ -83,7 +83,7 @@ figure).
 - What you created
 - How you evaluated it
 - Results and interpretation
-- Examples of positive and negative impact
+- Examples of positive and negative impact/risks
 - It should be placed in context of prior work and show how each team member contributed.
 
 ## Timeline
