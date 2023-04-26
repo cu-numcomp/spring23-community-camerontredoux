@@ -77,6 +77,12 @@ figure).
 
 7. Start a thread on Zulip titled "Your Name: Package Name" with a sentence or two describing the project and a link to your repository.
 
+8. Presentation Goals:
+- How you designed your study
+- What you created
+- How you evaluated it
+- It should be placed in context of prior work and show how each team member contributed.
+
 ## Timeline
 
 * March 24: Edit `proposal.md` with basic stats, commit, and push.
