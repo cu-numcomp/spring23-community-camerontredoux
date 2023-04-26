@@ -11,6 +11,8 @@ Actual benchmarking now done in the `benchmark` folder which is forked from faer
 - Perform in-depth analysis of the speed of performing certain operations (QR decomposition, multiplication, SVD) in nalgebra vs. Julia (built-ins or custom, could be interesting to see how a naive QR solution like in class would hold up).
 - See which cases SIMD matters or helps with performance.
 - Fairly easy to present in terms of visuals (graphically with time on x-axis and dimension of matrix on y-axis)
+- Use plotting libraries to visualize the effect that smaller matrix dimensions have on certain operations between different libraries.
+- Produce an analysis of results in order to explain why dynamic vs static allocation, and why smaller vs larger matrix dimensions lead to an improvement in speed.
 
 ## Questions
 
