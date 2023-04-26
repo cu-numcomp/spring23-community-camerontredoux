@@ -5,7 +5,6 @@ use human_repr::HumanDuration;
 use std::{
     fs::{self, File},
     io::Write,
-    path,
     time::Duration,
 };
 
@@ -98,6 +97,7 @@ mod no_piv_qr;
 mod partial_piv_lu;
 mod rectangular_svd;
 mod svd;
+mod types;
 
 macro_rules! printwriteln {
     ($out: expr, $($arg:tt)*) => {
@@ -241,7 +241,7 @@ Multiplication of two square matrices of dimension `n`.
             &gemm::faer::<f32>(&input_sizes, Parallelism::Rayon(0)),
             &gemm::ndarray::<f32>(&input_sizes),
             &gemm::nalgebra_d::<f32>(&input_sizes),
-            Some(&gemm::nalgebra_s(&input_sizes)),
+            Some(&gemm::nalgebra_s::<f32>(&input_sizes)),
             &eigen(eigen::gemm_f32, &input_sizes),
         )?;
         printwriteln!(file, "```")?;

@@ -2,5 +2,6 @@
   "files.associations": {
     "*.css": "postcss",
     "chrono": "cpp"
-  }
+  },
+  "rust-analyzer.linkedProjects": ["/benchmark/Cargo.toml"]
 }

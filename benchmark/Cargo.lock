@@ -492,6 +492,8 @@ dependencies = [
 [[package]]
 name = "faer-cholesky"
 version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2ea9702414372edeac77692f4423daf67964681580312ecccf2a885b13aeeb64"
 dependencies = [
  "assert2",
  "dyn-stack",
@@ -507,10 +509,11 @@ dependencies = [
 [[package]]
 name = "faer-core"
 version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "67b865fd5225875dbdea84fa69ecefd409fb9f1636c138894ee4c113cc052190"
 dependencies = [
  "aligned-vec",
  "assert2",
- "bytemuck",
  "coe-rs",
  "dyn-stack",
  "gemm",
@@ -525,6 +528,8 @@ dependencies = [
 [[package]]
 name = "faer-lu"
 version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "22bb5b4ca97dd2f238fe928d174e91cce4e9571164bc0287d6261a5cbcd02565"
 dependencies = [
  "assert2",
  "bytemuck",
@@ -533,7 +538,6 @@ dependencies = [
  "faer-core",
  "num-complex",
  "num-traits",
- "paste",
  "pulp",
  "rayon",
  "reborrow",
@@ -542,6 +546,8 @@ dependencies = [
 [[package]]
 name = "faer-qr"
 version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f1e4540b0a276df31e1980bde56b45c2910a07769f0838858d6ef0969842d84d"
 dependencies = [
  "assert2",
  "bytemuck",
@@ -558,6 +564,8 @@ dependencies = [
 [[package]]
 name = "faer-svd"
 version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "db53767ac0abdc434c6b29baa4bae75105afa04a5e217982d377281ae1bea4ad"
 dependencies = [
  "assert2",
  "bytemuck",
@@ -1124,7 +1132,6 @@ version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "02e0d21255c828d6f128a1e41534206671e8c3ea0c62f32291e808dc82cff17d"
 dependencies = [
- "bytemuck",
  "num-traits",
  "rand",
  "serde",
@@ -1387,12 +1394,11 @@ dependencies = [
 
 [[package]]
 name = "pulp"
-version = "0.12.1"
+version = "0.11.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d73de64a4b796140ed333551b0e171c8e4e0874d7a3d89fd53f4345491597b2"
+checksum = "866e8018d6397b0717100dd4a7948fc8cbc8c4b8ce3e39e98a0e1e878d3ba925"
 dependencies = [
  "bytemuck",
- "num-complex",
 ]
 
 [[package]]
