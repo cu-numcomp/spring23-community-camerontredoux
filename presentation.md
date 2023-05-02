@@ -23,11 +23,13 @@ Actual benchmarking now done in the `benchmark` folder which is forked from faer
 - Based on preliminary tests... why is Julia so much faster for larger dimension arrays?
 
 ## Methods of Interest
-- Matrix multiplication
-- Triangular solve
-- LU decomposition w/ partial pivoting
-- QR decomposition w/ no pivoting
-- Square matrix SVD
+
+- Matrix multiplication (gemm)
+- Triangular solve (trsm)
+- LU decomposition w/ partial pivoting (partial_piv_lu)
+- QR decomposition w/ no pivoting (no_piv_qr)
+- Square matrix SVD (svd)
+- Cholesky
 
 ## Other information
 
