@@ -1,27 +1,183 @@
 use super::timeit;
+use crate::{random, types};
 use dyn_stack::{DynStack, GlobalMemBuffer, ReborrowMut};
 use faer_core::{Mat, Parallelism};
-use ndarray_linalg::QR;
-use crate::random;
 use std::time::Duration;
 
-pub fn ndarray<T: ndarray_linalg::Lapack>(sizes: &[usize]) -> Vec<Duration> {
+pub fn nalgebra_s<T: nalgebra::ComplexField>(sizes: &[usize]) -> Vec<Duration> {
     sizes
         .iter()
         .copied()
-        .map(|n| {
-            let mut c = ndarray::Array::<T, _>::zeros((n, n));
-            for i in 0..n {
-                for j in 0..n {
-                    c[(i, j)] = random();
+        .map(|n| match n {
+            1 => {
+                let mut c = nalgebra::Matrix1::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
                 }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
             }
+            2 => {
+                let mut c = nalgebra::Matrix2::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
 
-            let time = timeit(|| {
-                c.qr().unwrap();
-            });
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
 
-            time
+                time
+            }
+            3 => {
+                let mut c = nalgebra::Matrix3::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            4 => {
+                let mut c = nalgebra::Matrix4::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            5 => {
+                let mut c = nalgebra::Matrix5::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            6 => {
+                let mut c = nalgebra::Matrix6::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            7 => {
+                let mut c = types::Matrix7::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            8 => {
+                let mut c = types::Matrix8::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            9 => {
+                let mut c = types::Matrix9::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            10 => {
+                let mut c = types::Matrix10::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            11 => {
+                let mut c = types::Matrix11::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            12 => {
+                let mut c = types::Matrix12::<T>::zeros();
+                for i in 0..n {
+                    for j in 0..n {
+                        c[(i, j)] = random();
+                    }
+                }
+
+                let time = timeit(|| {
+                    nalgebra::linalg::QR::new(c.clone());
+                });
+
+                time
+            }
+            _ => 0.0,
         })
         .map(Duration::from_secs_f64)
         .collect()
@@ -49,7 +205,10 @@ pub fn nalgebra<T: nalgebra::ComplexField>(sizes: &[usize]) -> Vec<Duration> {
         .collect()
 }
 
-pub fn faer<T: faer_core::ComplexField>(sizes: &[usize], parallelism: Parallelism) -> Vec<Duration> {
+pub fn faer<T: faer_core::ComplexField>(
+    sizes: &[usize],
+    parallelism: Parallelism,
+) -> Vec<Duration> {
     sizes
         .iter()
         .copied()
